@@ -21,7 +21,7 @@ Permite:
 ## 🚀 Instalação
 
 ```bash
-git clone https://github.com/seu-usuario/filtro-pix.git
+git clone https://github.com/Vini-Dev-Py/filtro-pix.git
 cd filtro-pix
 go build -o filtro-pix
 ```

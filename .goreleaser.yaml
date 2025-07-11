@@ -29,7 +29,7 @@ checksum:
 
 release:
   github:
-    owner: seu-usuario
+    owner: Vini-Dev-Py
     name: filtro-pix
   draft: false
   prerelease: false
