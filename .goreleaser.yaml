@@ -35,5 +35,4 @@ release:
   draft: false
   prerelease: false
 
-env_files:
-  - .env
+env_files: .env
