@@ -1,4 +1,3 @@
-
 # Makefile para filtro-pix
 
 APP_NAME=filtro-pix
@@ -40,8 +39,8 @@ version:
 
 ## Faz build de release real (requer GITHUB_TOKEN)
 release:
-	source .env && goreleaser release --clean
+	env $(cat .env | xargs) goreleaser release --clean
 
 ## Faz build snapshot (sem publicar no GitHub)
 snapshot:
-	source .env && goreleaser release --clean --snapshot
+	env $(cat .env | xargs) goreleaser release --clean --snapshot

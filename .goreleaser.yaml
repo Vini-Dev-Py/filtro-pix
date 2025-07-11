@@ -1,4 +1,4 @@
-version: 2
+version: 1
 
 project_name: filtro-pix
 
@@ -34,6 +34,3 @@ release:
     name: filtro-pix
   draft: false
   prerelease: false
-
-env_files:
-  - path: .env
