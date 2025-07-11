@@ -123,7 +123,7 @@ filtro-pix version
 
 ## 👨‍💻 Autor
 
-Desenvolvido por [Vinicius Guilherme Batista](https://github.com/seu-usuario)
+Desenvolvido por [Vinicius Guilherme Batista](https://github.com/Vini-Dev-Py)
 
 ---
 
