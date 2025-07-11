@@ -36,4 +36,4 @@ release:
   prerelease: false
 
 env_files:
-  - .env
+  - path: .env
