@@ -99,15 +99,23 @@ filtro-pix version
 ```
 .
 ├── cmd/
-│   ├── filter.go
+│   ├── extract_test.go
 │   ├── extract.go
+│   ├── filter_test.go
+│   ├── filter.go
+│   ├── root.go
 │   ├── version.go
-│   └── root.go
+├── dist/
+│   ├── filtro-pix_windows_amd64/
+│   ├── filtro-pix_linux_amd64/
+│   ├── filtro-pix_darwin_arm64/
+│   └── filtro-pix_darwin_amd64/
 ├── main.go
 ├── go.mod
 ├── go.sum
 ├── .env
 ├── Makefile
+├── .goreleaser.yaml
 └── README.md
 ```
 
