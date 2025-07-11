@@ -1,0 +1,39 @@
+# .goreleaser.yaml
+
+project_name: filtro-pix
+
+builds:
+  - id: filtro-pix
+    main: ./main.go
+    binary: filtro-pix
+    goos:
+      - linux
+      - windows
+      - darwin
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - README.md
+      - CHANGELOG.md
+      - filtro-pix
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: seu-usuario
+    name: filtro-pix
+  draft: false
+  prerelease: false
+
+env_files:
+  - .env
