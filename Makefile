@@ -12,6 +12,8 @@ EXTRACT_OUTPUT?=txids.txt
 ## Compila o binário localmente
 build:
 	go build -o $(APP_NAME) $(MAIN)
+	mkdir -p dist
+	mv $(APP_NAME) dist/
 
 ## Executa o CLI localmente
 run:

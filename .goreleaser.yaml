@@ -23,7 +23,7 @@ archives:
       - LICENSE
       - README.md
       - CHANGELOG.md
-      - filtro-pix
+      - dist/**/filtro-pix*
 
 checksum:
   name_template: "checksums.txt"
