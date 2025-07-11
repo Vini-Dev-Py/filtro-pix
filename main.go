@@ -1,8 +1,6 @@
 package main
 
-import (
-	"filtro-pix/cmd"
-)
+import "github.com/Vini-Dev-Py/filtro-pix/cmd"
 
 var version = "dev" // será substituído pelo GoReleaser com -ldflags
 

@@ -1,4 +1,4 @@
-module filtro-pix
+module github.com/Vini-Dev-Py/filtro-pix
 
 go 1.24.0
 
