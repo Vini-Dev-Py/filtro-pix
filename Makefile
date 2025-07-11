@@ -18,6 +18,10 @@ build:
 run:
 	go run $(MAIN)
 
+## Executa os testes
+test:
+	go test -v ./cmd/...
+
 ## Remove binários antigos
 clean:
 	rm -f $(APP_NAME)

@@ -9,62 +9,53 @@ import (
 	"github.com/spf13/cobra"
 )
 
-var inputFilter string
-var outputFilter string
+var (
+	inputFilterFile  string
+	outputFilterFile string
+)
 
 var filterCmd = &cobra.Command{
 	Use:   "filter",
-	Short: "Filtra linhas que contenham 'Pagamento Pix'",
-	Long: `O comando 'filter' varre um arquivo de log linha por linha e salva 
-apenas as linhas que contenham o texto 'Pagamento Pix'.
-
-Exemplo de uso:
-  filtro-pix filter --input entrada.log --output pagamentos_pix.log
-`,
+	Short: "Filtra linhas com 'Pagamento Pix' de um arquivo de log",
+	Long:  "Lê um arquivo linha por linha e salva apenas as que contêm 'Pagamento Pix' em um novo arquivo.",
 	Run: func(cmd *cobra.Command, args []string) {
-		filterPixLines(inputFilter, outputFilter)
+		if inputFilterFile == "" || outputFilterFile == "" {
+			fmt.Println("Você precisa fornecer os arquivos de entrada e saída usando os flags -i e -o.")
+			return
+		}
+
+		in, err := os.Open(inputFilterFile)
+		if err != nil {
+			fmt.Println("Erro ao abrir arquivo de entrada:", err)
+			return
+		}
+		defer in.Close()
+
+		out, err := os.Create(outputFilterFile)
+		if err != nil {
+			fmt.Println("Erro ao criar arquivo de saída:", err)
+			return
+		}
+		defer out.Close()
+
+		scanner := bufio.NewScanner(in)
+		writer := bufio.NewWriter(out)
+
+		count := 0
+		for scanner.Scan() {
+			line := scanner.Text()
+			if strings.Contains(line, "Pagamento Pix") {
+				writer.WriteString(line + "\n")
+				count++
+			}
+		}
+		writer.Flush()
+		fmt.Printf("✅ %d linhas contendo 'Pagamento Pix' foram salvas em %s\n", count, outputFilterFile)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(filterCmd)
-	filterCmd.Flags().StringVarP(&inputFilter, "input", "i", "", "Arquivo de entrada")
-	filterCmd.Flags().StringVarP(&outputFilter, "output", "o", "pagamentos_pix.log", "Arquivo de saída")
-	filterCmd.MarkFlagRequired("input")
-}
-
-// ---------------------
-// IMPLEMENTAÇÃO
-// ---------------------
-
-func filterPixLines(inputPath, outputPath string) {
-	inputFile, err := os.Open(inputPath)
-	if err != nil {
-		fmt.Printf("Erro ao abrir o arquivo de entrada: %v\n", err)
-		return
-	}
-	defer inputFile.Close()
-
-	outputFile, err := os.Create(outputPath)
-	if err != nil {
-		fmt.Printf("Erro ao criar o arquivo de saída: %v\n", err)
-		return
-	}
-	defer outputFile.Close()
-
-	scanner := bufio.NewScanner(inputFile)
-	writer := bufio.NewWriter(outputFile)
-
-	count := 0
-	for scanner.Scan() {
-		line := scanner.Text()
-		if strings.Contains(line, "Pagamento Pix") {
-			writer.WriteString(line + "\n")
-			count++
-		}
-	}
-
-	writer.Flush()
-
-	fmt.Printf("Linhas contendo 'Pagamento Pix' salvas em '%s': %d\n", outputPath, count)
+	filterCmd.Flags().StringVarP(&inputFilterFile, "input", "i", "", "Arquivo de entrada")
+	filterCmd.Flags().StringVarP(&outputFilterFile, "output", "o", "", "Arquivo de saída")
 }
